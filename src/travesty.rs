@@ -11,7 +11,7 @@ const ASCII_SPACE: u8 = 32;
 const ASCII_DEL: u8 = 127;
 
 pub struct Travesty {
-    array_size: usize,
+    input_buffer: usize,
     max_pattern_length: usize,
     pattern_length: usize,
     use_verse: bool,
@@ -29,7 +29,7 @@ pub struct Travesty {
 }
 
 impl Travesty {
-    pub fn init(array_size_param: usize,
+    pub fn init(input_buffer_param: usize,
             pattern_length_param: usize,
             max_pattern_length_param: usize,
             out_chars_param: usize,
@@ -37,8 +37,8 @@ impl Travesty {
             debug_param: bool,
             input_file_param: String ) -> Self {
 
-        let mut array_size = array_size_param;
-        if array_size > ARRAYSIZE_MAX { array_size = ARRAYSIZE_MAX }
+        let mut input_buffer = input_buffer_param;
+        if input_buffer > ARRAYSIZE_MAX { input_buffer = ARRAYSIZE_MAX }
         let max_pattern_length = max_pattern_length_param;
         let pattern_length = pattern_length_param;
         let use_verse = use_verse_param;
@@ -55,7 +55,7 @@ impl Travesty {
         let char_count = 0;
         let near_end = false;
 
-        Self { array_size, max_pattern_length, pattern_length, use_verse,
+        Self { input_buffer, max_pattern_length, pattern_length, use_verse,
                 input_file, buffer, big_array, freq_array, start_skip,
                 skip_array, pattern, out_chars, char_count, near_end, debug }
     }
@@ -82,7 +82,7 @@ impl Travesty {
 
         let re = Regex::new(r"(\s{2,})").unwrap();
         let big_array_tmp = &re.replace_all(&self.buffer, " ");
-        self.big_array = big_array_tmp[0..self.array_size-(self.max_pattern_length + 1)].to_string();
+        self.big_array = big_array_tmp[0..self.input_buffer-(self.max_pattern_length + 1)].to_string();
         self.big_array.push_str(&" ".to_string());
         self.big_array.push_str(&big_array_tmp[0..self.pattern_length].to_string());
 
@@ -187,7 +187,7 @@ impl Travesty {
 
     pub fn output_debug_info(&mut self, show_buffer: bool, show_big_array: bool) {
         //println!("{:?}", *travesty);
-        print!("array_size={} ", self.array_size);
+        print!("input_buffer={} ", self.input_buffer);
         print!("pattern_length={} ", self.pattern_length);
         print!("out_chars={} ", self.out_chars);
         print!("input_file={} ", self.input_file);
