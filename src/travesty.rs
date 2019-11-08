@@ -208,7 +208,7 @@ impl Travesty {
         self.clear_freq_array();
         self.fill_array();
 
-        if self.debug { self.output_debug_info(false, true); }
+        if self.debug { self.output_debug_info(false, false); }
 
         self.first_pattern();
         self.init_skip_array();

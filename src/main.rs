@@ -5,7 +5,9 @@ use clap::{Arg, App};
 mod travesty;
 
 const DEFAULT_ARRAYSIZE: usize = 3000;
-const DEFAULT_MAXPAT: usize = 9;
+const DEFAULT_PATTERN_LENGTH: usize = 9;
+const DEFAULT_PATTERN_LENGTH_MAX: usize = 15;
+const DEFAULT_PATTERN_LENGTH_MIN: usize = 3;
 const DEFAULT_OUTCHARS: usize = 2000;
 const DEFAULT_LINE_WIDTH: usize = 50;
 
@@ -36,7 +38,7 @@ impl TravestyArgumentParser {
                      .short("b")
                      .long("buffer-size")
                      .takes_value(true)
-                     .help("The size of the Buffer Size"))
+                     .help("The size of the buffer to be analyzed. The larger this is the slower the output will appear"))
             .arg(Arg::with_name("out_chars")
                      .short("o")
                      .long("output-size")
@@ -46,7 +48,7 @@ impl TravestyArgumentParser {
                      .short("l")
                      .long("line-width")
                      .takes_value(true)
-                     .help("Approximate line length"))
+                     .help("Approximate line length of the output"))
             .arg(Arg::with_name("debug")
                      .short("d")
                      .long("debug")
@@ -63,11 +65,14 @@ impl TravestyArgumentParser {
 
         let buffer_size = matches.value_of("buffer_size").unwrap_or(&DEFAULT_ARRAYSIZE.to_string()).parse::<usize>().unwrap();
 
-        let mut pattern_length = matches.value_of("pattern_length").unwrap_or(&DEFAULT_MAXPAT.to_string()).parse::<usize>().unwrap();
-        if pattern_length > DEFAULT_MAXPAT {
-            println!("WARN: patlen ({}) is greater than maximum allowed ({})", pattern_length, DEFAULT_MAXPAT);
-            pattern_length = DEFAULT_MAXPAT;
-        };
+        let mut pattern_length = matches.value_of("pattern_length").unwrap_or(&DEFAULT_PATTERN_LENGTH.to_string()).parse::<usize>().unwrap();
+        if pattern_length > DEFAULT_PATTERN_LENGTH_MAX {
+            println!("WARN: pattern-length ({}) is greater than maximum allowed ({})", pattern_length, DEFAULT_PATTERN_LENGTH_MAX);
+            pattern_length = DEFAULT_PATTERN_LENGTH_MAX;
+        } else if pattern_length < DEFAULT_PATTERN_LENGTH_MIN {
+            println!("WARN: pattern-length ({}) is less than minimum allowed ({})", pattern_length, DEFAULT_PATTERN_LENGTH_MIN);
+            pattern_length = DEFAULT_PATTERN_LENGTH_MIN;
+        }
 
         let out_chars = matches.value_of("out_chars").unwrap_or(&DEFAULT_OUTCHARS.to_string()).parse::<usize>().unwrap();
 
@@ -87,7 +92,7 @@ fn main() {
     let params: TravestyArgumentParser = TravestyArgumentParser::parse();
     let mut travesty: travesty::Travesty = travesty::Travesty::init(params.buffer_size,
         params.pattern_length,
-        DEFAULT_MAXPAT,
+        DEFAULT_PATTERN_LENGTH_MAX,
         params.out_chars,
         params.line_width,
         params.use_verse,
