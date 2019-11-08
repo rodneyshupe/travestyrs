@@ -12,7 +12,6 @@ const ASCII_DEL: u8 = 127;
 
 pub struct Travesty {
     buffer_size: usize,
-    max_pattern_length: usize,
     pattern_length: usize,
     use_verse: bool,
     input_file: String,
@@ -32,7 +31,6 @@ pub struct Travesty {
 impl Travesty {
     pub fn init(buffer_size_param: usize,
             pattern_length_param: usize,
-            max_pattern_length_param: usize,
             out_chars_param: usize,
             line_width_param: usize,
             use_verse_param: bool,
@@ -41,7 +39,6 @@ impl Travesty {
 
         let mut buffer_size = buffer_size_param;
         if buffer_size > ARRAYSIZE_MAX { buffer_size = ARRAYSIZE_MAX }
-        let max_pattern_length = max_pattern_length_param;
         let pattern_length = pattern_length_param;
         let use_verse = use_verse_param;
         let debug = debug_param;
@@ -58,7 +55,7 @@ impl Travesty {
         let char_count = 0;
         let near_end = false;
 
-        Self { buffer_size, max_pattern_length, pattern_length, use_verse,
+        Self { buffer_size, pattern_length, use_verse,
                 input_file, buffer, buffer_array, freq_array, start_skip,
                 skip_array, pattern, out_chars, line_width, char_count, near_end, debug }
     }
@@ -85,7 +82,7 @@ impl Travesty {
 
         let re = Regex::new(r"(\s{2,}|\n)").unwrap();
         let buffer_array_tmp = &re.replace_all(&self.buffer, " ");
-        self.buffer_array = buffer_array_tmp[0..self.buffer_size-(self.max_pattern_length + 1)].to_string();
+        self.buffer_array = buffer_array_tmp[0..self.buffer_size-(self.pattern_length + 1)].to_string();
         self.buffer_array.push_str(&" ".to_string());
         self.buffer_array.push_str(&buffer_array_tmp[0..self.pattern_length].to_string());
 

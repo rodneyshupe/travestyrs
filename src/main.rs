@@ -92,7 +92,6 @@ fn main() {
     let params: TravestyArgumentParser = TravestyArgumentParser::parse();
     let mut travesty: travesty::Travesty = travesty::Travesty::init(params.buffer_size,
         params.pattern_length,
-        DEFAULT_PATTERN_LENGTH_MAX,
         params.out_chars,
         params.line_width,
         params.use_verse,
