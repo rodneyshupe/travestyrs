@@ -80,7 +80,7 @@ impl Travesty {
         }
         self.buffer = self.buffer.trim().to_string();
 
-        let re = Regex::new(r"(\s{2,})").unwrap();
+        let re = Regex::new(r"(\s{2,}|\n)").unwrap();
         let big_array_tmp = &re.replace_all(&self.buffer, " ");
         self.big_array = big_array_tmp[0..self.input_buffer-(self.max_pattern_length + 1)].to_string();
         self.big_array.push_str(&" ".to_string());
@@ -206,7 +206,7 @@ impl Travesty {
         self.clear_freq_array();
         self.fill_array();
 
-        if self.debug { self.output_debug_info(false, false); }
+        if self.debug { self.output_debug_info(false, true); }
 
         self.first_pattern();
         self.init_skip_array();
