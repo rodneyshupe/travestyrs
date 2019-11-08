@@ -182,7 +182,7 @@ impl Travesty {
     // This removes the first character of the Pattern and appends the character
     // just printed. FreqArray is zeroed in preparation for a new scan.
     fn new_pattern(&mut self, next_char: char) {
-        self.pattern = self.pattern[1..self.max_pattern_length].to_string();
+        self.pattern = self.pattern[1..self.pattern_length].to_string();
         self.pattern.push_str(&next_char.to_string());
         self.clear_freq_array();
     }
@@ -190,17 +190,21 @@ impl Travesty {
     pub fn output_debug_info(&mut self, show_buffer: bool, show_big_array: bool) {
         //println!("{:?}", *travesty);
         print!("array_size={} ", self.array_size);
-        print!("max_pattern_length={} ", self.max_pattern_length);
+        print!("pattern_length={} ", self.pattern_length);
         print!("out_chars={} ", self.out_chars);
         print!("input_file={} ", self.input_file);
+        print!("buffer Size= {} ", self.buffer.chars().count());
+        print!("big_array Size={} ", self.big_array.chars().count());
         println!("");
-        println!("buffer Size= {}", self.buffer.chars().count());
         if show_buffer {
+            println!("Buffer Data:");
             println!("{}", self.buffer);
+            println!("");
         }
-        println!("big_array Size={}", self.big_array.chars().count());
         if show_big_array {
+            println!("big_array:");
             println!("{}", self.big_array);
+            println!("");
         }
     }
 
