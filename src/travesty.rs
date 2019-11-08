@@ -151,10 +151,7 @@ impl Travesty {
             } else {
                 toss = 0;
             }
-
         }
-        //let new_char = counter as char;
-        //new_char
         counter as char
     }
 
@@ -186,14 +183,13 @@ impl Travesty {
     }
 
     pub fn output_debug_info(&mut self, show_buffer: bool, show_big_array: bool) {
-        //println!("{:?}", *travesty);
         print!("input_buffer={} ", self.input_buffer);
         print!("pattern_length={} ", self.pattern_length);
         print!("out_chars={} ", self.out_chars);
         print!("input_file={} ", self.input_file);
         print!("buffer Size= {} ", self.buffer.chars().count());
         print!("big_array Size={} ", self.big_array.chars().count());
-        println!("");
+        println!("\n");
         if show_buffer {
             println!("Buffer Data:");
             println!("{}", self.buffer);
