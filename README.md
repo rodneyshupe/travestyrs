@@ -9,13 +9,21 @@ My first exposure was via a Pascal program published in the [November Issue of B
 Since then I have implemented this algorithm to learn new languages.
 
 ## Getting Started
+
 After cloning the repo you can quickly run with the following:
 ```sh
 cargo run -- sample.txt
 ```
 
+If you want to run with debugging on try the following:
+```sh
+RUST_BACKTRACE=1 cargo run -- -a 1000 -o 200 -d sample.txt
+```
+
 ## Application Usage
+
 Display usage message with `cargo run -- --help`
+
 ```
 USAGE:
     travestyrs [FLAGS] [OPTIONS] [INPUT]
