@@ -213,9 +213,10 @@ impl Travesty {
         self.first_pattern();
         self.init_skip_array();
 
-        while self.char_count < self.out_chars {
+        let mut next_char: char = ' ';
+        while self.char_count < self.out_chars || next_char != ' ' {
             self.match_pattern();
-            let next_char = self.get_next_char();
+            next_char = self.get_next_char();
             self.write_character(next_char);
             self.new_pattern(next_char);
         }
