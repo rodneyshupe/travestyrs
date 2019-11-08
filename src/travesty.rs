@@ -115,8 +115,6 @@ impl Travesty {
             self.skip_array[j - 1] = self.start_skip[ch as usize];
             self.start_skip[ch as usize] = j;
         }
-//println! ("DEBUG: skip_array: {:?}", self.skip_array);
-//println! ("DEBUG: start_skip: {:?}", self.start_skip);
     }
 
     // Checks big_array for strings that match Pattern; for each match found, notes
