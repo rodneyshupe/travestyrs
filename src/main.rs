@@ -7,12 +7,15 @@ mod travesty;
 const DEFAULT_ARRAYSIZE: usize = 3000;
 const DEFAULT_MAXPAT: usize = 9;
 const DEFAULT_OUTCHARS: usize = 2000;
+const DEFAULT_LINE_WIDTH: usize = 50;
+
 
 #[derive(Debug)]
 struct TravestyArgumentParser {
-    input_buffer: usize,
+    buffer_size: usize,
     pattern_length: usize,
     out_chars: usize,
+    line_width: usize,
     use_verse: bool,
     debug: bool,
     input_file: String,
@@ -26,26 +29,30 @@ impl TravestyArgumentParser {
             .about("Teaches argument parsing")
             .arg(Arg::with_name("pattern_length")
                      .short("p")
-                     .long("patlen")
+                     .long("pattern-length")
                      .takes_value(true)
                      .help("Pattern Length"))
-            .arg(Arg::with_name("input_buffer")
-                     .short("a")
-                     .long("arrsize")
+            .arg(Arg::with_name("buffer_size")
+                     .short("b")
+                     .long("buffer-size")
                      .takes_value(true)
-                     .help("ArraySize"))
+                     .help("The size of the Buffer Size"))
             .arg(Arg::with_name("out_chars")
                      .short("o")
-                     .long("outputsize")
+                     .long("output-size")
                      .takes_value(true)
-                     .help("Number of characters to output."))
+                     .help("Number of characters to output"))
+            .arg(Arg::with_name("line_width")
+                     .short("l")
+                     .long("line-width")
+                     .takes_value(true)
+                     .help("Approximate line length"))
             .arg(Arg::with_name("debug")
                      .short("d")
                      .long("debug")
                      .multiple(true)
                      .help("Number of characters to output."))
             .arg(Arg::with_name("use_verse")
-                     .short("v")
                      .long("verse")
                      .help("Sets output to verse mode, defaults to prose"))
             .arg(Arg::with_name("INPUT")
@@ -54,7 +61,7 @@ impl TravestyArgumentParser {
                      .index(1))
             .get_matches();
 
-        let input_buffer = matches.value_of("input_buffer").unwrap_or(&DEFAULT_ARRAYSIZE.to_string()).parse::<usize>().unwrap();
+        let buffer_size = matches.value_of("buffer_size").unwrap_or(&DEFAULT_ARRAYSIZE.to_string()).parse::<usize>().unwrap();
 
         let mut pattern_length = matches.value_of("pattern_length").unwrap_or(&DEFAULT_MAXPAT.to_string()).parse::<usize>().unwrap();
         if pattern_length > DEFAULT_MAXPAT {
@@ -64,22 +71,25 @@ impl TravestyArgumentParser {
 
         let out_chars = matches.value_of("out_chars").unwrap_or(&DEFAULT_OUTCHARS.to_string()).parse::<usize>().unwrap();
 
+        let line_width = matches.value_of("line_width").unwrap_or(&DEFAULT_LINE_WIDTH.to_string()).parse::<usize>().unwrap();
+
         let use_verse = matches.is_present("use_verse");
-        
+
         let debug = matches.is_present("debug");
 
         let input_file = matches.value_of("INPUT").unwrap_or(&"".to_string()).to_string();
 
-        Self { input_buffer, pattern_length, out_chars, use_verse, debug, input_file }
+        Self { buffer_size, pattern_length, out_chars, use_verse, line_width, debug, input_file }
     }
 }
 
 fn main() {
     let params: TravestyArgumentParser = TravestyArgumentParser::parse();
-    let mut travesty: travesty::Travesty = travesty::Travesty::init(params.input_buffer,
+    let mut travesty: travesty::Travesty = travesty::Travesty::init(params.buffer_size,
         params.pattern_length,
         DEFAULT_MAXPAT,
         params.out_chars,
+        params.line_width,
         params.use_verse,
         params.debug,
         params.input_file);
