@@ -32,19 +32,25 @@ RUST_BACKTRACE=1 cargo run -- -a 1000 -o 200 -d sample.txt
 Display usage message with `cargo run -- --help`
 
 ```
+Travesty 0.1.0
+Rodney Shupe <rodney@shupe.ca>
+Teaches argument parsing
+
 USAGE:
     travestyrs [FLAGS] [OPTIONS] [INPUT]
 
 FLAGS:
     -d, --debug      Number of characters to output.
     -h, --help       Prints help information
-    -v, --verse      Sets output to verse mode, defaults to prose
+        --verse      Sets output to verse mode, defaults to prose
     -V, --version    Prints version information
 
 OPTIONS:
-    -a, --arrsize <array_size>       ArraySize
-    -o, --outputsize <out_chars>     Number of characters to output.
-    -p, --patlen <pattern_length>    Pattern Length
+    -b, --buffer-size <buffer_size>          The size of the buffer to be analyzed. The larger this is the slower the
+                                             output will appear
+    -l, --line-width <line_width>            Approximate line length of the output
+    -o, --output-size <out_chars>            Number of characters to output
+    -p, --pattern-length <pattern_length>    Pattern Length
 
 ARGS:
     <INPUT>    Sets the input file to use
@@ -52,3 +58,4 @@ ARGS:
 
 ## Attributions:
 `sample.txt` - Extract from [bbejeck](https://github.com/bbejeck/hadoop-algorithms/blob/master/src/shakespeare.txt)
+`adventure.txt` - Extract from Crowther, Will, and D. Woods. [Adventure](http://mirror.ifarchive.org/if-archive/games/source/adv350-pdp10.tar.gz) (aka "ADVENT" and "Colossal Cave") FORTRAN source code. 1977.
