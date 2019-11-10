@@ -1,12 +1,18 @@
 # Travesty in Rust lang
 
-A simple project for me to learn Rust Lang.  This analyzes input text and then randomly generates text output based on the pattern probability.
+A simple project for me to learn Rust Lang.  This analyzes input text and then
+randomly generates text output based on the pattern probability.
 
-My first exposure to this algorithm was via a Pascal version published in [BYTE November 1984](https://www.scribd.com/doc/99613420/Travesty-in-Byte) ([alt reference](https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up)).  Since then I have implemented this algorithm to learn new languages.
+My first exposure to this algorithm was via a Pascal version published in
+[BYTE November 1984](https://www.scribd.com/doc/99613420/Travesty-in-Byte)
+([alt reference](https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up)).
+Since then I have implemented this algorithm to learn new languages.
 
 ## Algorithm
 
-This is a free interpretation of the Travesty algorithm by Hugh Kenner and Joseph O'Rourke discussed in BYTE based on the paper "[Richard A. O’Keefe - An introduction to Hidden Markov Models](www.cs.otago.ac.nz/cosc348/hmm/hmm.pdf)".
+This is a free interpretation of the Travesty algorithm by Hugh Kenner and
+Joseph O'Rourke discussed in BYTE based on the paper
+"[Richard A. O’Keefe - An introduction to Hidden Markov Models](www.cs.otago.ac.nz/cosc348/hmm/hmm.pdf)".
 
 From this paper:
 > A kth-order travesty generator keeps a “left context” of k symbols. Here k = 3, one context is “fro”. At each step, we find all the places in the text that have the same left context, pick one of them at random, emit the character we find there, and shift the context one place to the left. For example, the text contains “(fro)m”, so we emit “m” and shift the context to “rom”. The text contains “p(rom)ise”, so we emit “i” and shift the context to “omi”. The text contains “n(omi)nation”, so we emit “n” and shift the context to “min”. The text contains “(min)e”, so we emit “e” and shift the context to “ine”. And so we end up with “fromine”.
@@ -53,5 +59,5 @@ ARGS:
 ```
 
 ## Attributions:
-`sample.txt` - Extract from [bbejeck](https://github.com/bbejeck/hadoop-algorithms/blob/master/src/shakespeare.txt)
-`adventure.txt` - Extract from Crowther, Will, and D. Woods. [Adventure](http://mirror.ifarchive.org/if-archive/games/source/adv350-pdp10.tar.gz) (aka "ADVENT" and "Colossal Cave") FORTRAN source code. 1977.
+* `sample.txt` - Extract from [bbejeck](https://github.com/bbejeck/hadoop-algorithms/blob/master/src/shakespeare.txt)
+* `adventure.txt` - Extract from Crowther, Will, and D. Woods. [Adventure](http://mirror.ifarchive.org/if-archive/games/source/adv350-pdp10.tar.gz) (aka "ADVENT" and "Colossal Cave") FORTRAN source code. 1977.
