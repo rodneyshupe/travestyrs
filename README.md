@@ -1,8 +1,8 @@
 # Travesty in Rust lang
 
-A simple project for me to learn Rust Lang.  This analyzes input text and then randomly generates text output based on the execution.
+A simple project for me to learn Rust Lang.  This analyzes input text and then randomly generates text output based on the pattern probability.
 
-My first exposure to this algorithm was via a Pascal version published in [BYTE November 1984](www.scribd.com/doc/99613420/Travesty-in-Byte) ([alt reference](https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up)).  Since then I have implemented this algorithm to learn new languages.
+My first exposure to this algorithm was via a Pascal version published in [BYTE November 1984](https://www.scribd.com/doc/99613420/Travesty-in-Byte) ([alt reference](https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up)).  Since then I have implemented this algorithm to learn new languages.
 
 ## Algorithm
 
@@ -32,10 +32,6 @@ RUST_BACKTRACE=1 cargo run -- -a 1000 -o 200 -d sample.txt
 Display usage message with `cargo run -- --help`
 
 ```
-Travesty 0.1.0
-Rodney Shupe <rodney@shupe.ca>
-Teaches argument parsing
-
 USAGE:
     travestyrs [FLAGS] [OPTIONS] [INPUT]
 

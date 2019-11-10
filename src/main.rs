@@ -26,9 +26,9 @@ struct TravestyArgumentParser {
 impl TravestyArgumentParser {
     fn parse() -> Self {
         let matches = App::new("Travesty")
-            .version("0.1.0")
+            .version("1.0.0")
             .author("Rodney Shupe <rodney@shupe.ca>")
-            .about("Teaches argument parsing")
+            .about("Analyzes input text and then randomly generates text output based on the pattern porbablity.")
             .arg(Arg::with_name("pattern_length")
                      .short("p")
                      .long("pattern-length")
