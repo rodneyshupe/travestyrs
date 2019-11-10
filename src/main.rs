@@ -53,7 +53,7 @@ impl TravestyArgumentParser {
                      .short("d")
                      .long("debug")
                      .multiple(true)
-                     .help("Number of characters to output."))
+                     .help("Print debugging info"))
             .arg(Arg::with_name("use_verse")
                      .long("verse")
                      .help("Sets output to verse mode, defaults to prose"))
