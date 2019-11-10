@@ -48,7 +48,7 @@ impl TravestyArgumentParser {
                      .short("l")
                      .long("line-width")
                      .takes_value(true)
-                     .help("Approximate line length of the output"))
+                     .help("Approximate line length to output"))
             .arg(Arg::with_name("debug")
                      .short("d")
                      .long("debug")
