@@ -74,8 +74,10 @@ impl Travesty {
     // as the pattern_length, in effect wrapping the end to the beginning.
     fn fill_array(&mut self) {
         if self.input_file.trim().is_empty() {
+            println!("Reading from stdin...");
             io::stdin().read_to_string(&mut self.buffer).expect("ERROR: Something went wrong reading from stdin");;
         } else {
+            println!("Reading from: {}...", self.input_file);
             self.buffer = fs::read_to_string(&mut self.input_file).expect("ERROR: Something went wrong reading the file");
         }
         self.buffer = self.buffer.trim().to_string();
