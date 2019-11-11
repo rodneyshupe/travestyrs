@@ -6,7 +6,21 @@ randomly generates text output based on the pattern probability.
 My first exposure to this algorithm was via a Pascal version published in
 [BYTE November 1984](https://www.scribd.com/doc/99613420/Travesty-in-Byte)
 ([alt reference](https://archive.org/stream/byte-magazine-1984-11/1984_11_BYTE_09-12_New_Chips#page/n129/mode/2up)).
-Since then I have implemented this algorithm to learn new languages.
+Since then I have implemented this algorithm as a learning tool for new
+languages. Besides this implementation, I have done implementations in
+*HP Basic*,
+*Diabol*,
+*Cobol*,
+*PL1*,
+*Plus*,
+*C*,
+*Visual Basic*,
+*Java*,
+*Perl*,
+*Node.js*,
+[*Python*](https://github.com/rodneyshupe/travestypy),
+[*Bash*](https://github.com/rodneyshupe/travestysh),
+and probably a few I have forgotten.
 
 ## Algorithm
 
